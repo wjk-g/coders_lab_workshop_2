@@ -4,7 +4,7 @@
 # Utworzysz bazę danych. Jeśli baza już istnieje, skrypt ma poinformować o tym użytkownika, 
 # nie przerywając swojego działania (Podpowiedź: możesz przechwycić błąd: DuplicateDatabase).
 
-from psycopg2 import connect, ProgrammingError # ProgrammingError imports DuplicateDatabase and DuplicateTable
+from psycopg2 import connect, ProgrammingError, OperationalError # ProgrammingError imports DuplicateDatabase and DuplicateTable
 
 sql_create_db = 'CREATE DATABASE workshop2;'
 
@@ -18,6 +18,9 @@ try:
     print("The database has been created.")
 except ProgrammingError: # can this be made more explicit? (https://www.psycopg.org/docs/errors.html)
     print("The database you're trying to create already exists.")
+except OperationalError:
+    print("Failed to connect to the database.")
+
 else:
     cursor.close()
     cnx.close()
@@ -46,6 +49,8 @@ try:
     cnx.close()
 except ProgrammingError: # DuplicateTable
     print("The table you're trying to create (users) already exists.")
+except OperationalError:
+    print("Failed to connect to the database.")
 
 # Stworzysz tabelę przechowującą komunikaty (messages). Powinna posiadać następujące kolumny:
 # + id – klucz główny (najlepiej typu serial),
@@ -77,3 +82,5 @@ try:
     print("Messages table has been created.")
 except ProgrammingError:
     print("The table you're trying to create (messages) already exists.")
+except OperationalError:
+    print("Failed to connect to the database.")
