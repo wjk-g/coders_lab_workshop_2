@@ -32,9 +32,9 @@ else:
 sql_create_users_tbl = '''CREATE TABLE users (
     id serial,
     username varchar(255),
-    hashed_password varchar(80)
+    hashed_password varchar(80),
     PRIMARY KEY (id)
-    )
+    );
 '''
 
 try:
@@ -42,10 +42,10 @@ try:
     cursor = cnx.cursor()
     cursor.execute(sql_create_users_tbl)
     cnx.commit()
-    print("Table has been created.")
+    print("Users table has been created.")
     cnx.close()
 except ProgrammingError: # DuplicateTable
-    print("The table you're trying to create already exists.")
+    print("The table you're trying to create (users) already exists.")
 
 # Stworzysz tabelę przechowującą komunikaty (messages). Powinna posiadać następujące kolumny:
 # + id – klucz główny (najlepiej typu serial),
@@ -59,13 +59,21 @@ except ProgrammingError: # DuplicateTable
 sql_create_messages_tbl = '''
 CREATE TABLE messages (
     id serial,
-    from_id int not null
-    to_id int not null
-    creation_date timestamp
-    text varchar(255)
-    PRIMARY KEY(id)
-    FOREIGN KEY(from_id)
-    FOREIGN KEY(to_id) 
-
-)
+    from_id int NOT NULL,
+    to_id int NOT NULL,
+    creation_date timestamp NOT NULL DEFAULT now(),
+    text varchar(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY(from_id) REFERENCES users(id),
+    FOREIGN KEY(to_id) REFERENCES users(id)
+);
 '''
+
+try:
+    cnx = connect(user="postgres", password="hopfizz", host="localhost", database="workshop2")
+    cursor = cnx.cursor()
+    cursor.execute(sql_create_messages_tbl)
+    cnx.commit()
+    print("Messages table has been created.")
+except ProgrammingError:
+    print("The table you're trying to create (messages) already exists.")
