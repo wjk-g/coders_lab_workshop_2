@@ -76,34 +76,3 @@ elif args.username and args.password:
         create_user(args.username, args.password)
 else:
     parser.print_help()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#print("edit_password 1")
-#edit_password("E.T", "go_home", "newpassword")
-#edit_password("E.T", "newpassword", "newerpassword")
-
-#print("edit_password 2")
-#edit_password("Dalek", "exterminate!", "peaceandlove")
-
-
-
-#print("edit_password 2")
-#edit_password("R2D2", "blipblipblip", "blipblapblep")
-##edit_password("Dalek", "peaceandlove", "12345678")
-#print("edit_password 3")
-#edit_password("aaaaaa", "aaaaaaa", "aaaaaaaaaaaaaa")
-#
-#

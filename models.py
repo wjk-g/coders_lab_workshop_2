@@ -165,7 +165,7 @@ class Message:
     
     @staticmethod
     def clear_messages(cursor):
-        sql = 'DELETE FROM messages;' # semicolons not necessary...
+        sql = 'DELETE FROM messages;'
         cursor.execute(sql)
         return True
 
