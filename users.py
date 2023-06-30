@@ -1,6 +1,6 @@
 import argparse
 from models import User
-from psycopg2 import connect, IntegrityError, InternalError
+from psycopg2 import connect, IntegrityError
 from clcrypto import check_password, hash_password
 
 # Creating the parser

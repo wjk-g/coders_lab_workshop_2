@@ -149,17 +149,17 @@ class Message:
         
     @staticmethod
     def load_all_messages(cursor):
-        sql = 'SELECT from_id, to_id, text FROM messages;' # no semicolon on LMS
+        sql = 'SELECT id, from_id, to_id, text, creation_date FROM messages;' # no semicolon on LMS
         messages = []
         cursor.execute(sql)
         for row in cursor:
-            id_, from_id, to_id, text, creation_data = row
+            id_, from_id, to_id, text, creation_date = row
             message = Message()
             message._id = id_
             message.from_id = from_id
             message.to_id = to_id 
             message.text = text
-            message.creation_data = creation_data
+            message._creation_date = creation_date
             messages.append(message)
         return messages
     
