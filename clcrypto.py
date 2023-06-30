@@ -1,5 +1,7 @@
 # Module for password hashing provided by CodersLab
 import hashlib
+import random
+import string
 
 def hash_password(password, salt=None):
     """
@@ -79,5 +81,5 @@ def generate_salt():
     for i in range(0, 16):
 
         # get a random element from the iterable
-        salt += random.choice(ALPHABET)
+        salt += random.choice(string.ascii_letters + string.digits)
     return salt
